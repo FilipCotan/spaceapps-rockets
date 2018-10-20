@@ -88,8 +88,8 @@
                     icon: data.launches[0].rocket.imageURL,
                     timeout: 4000,
                     onClick: function () {
-                        
-                        window.location.href = data.launches[0].vidURLs[0].replace(/(.*?v=)([a-zA-Z0-9]+)/, "https://www.youtube.com/embed/$2")
+                        window.open(data.launches[0].vidURLs[0]
+                            .replace(/(.*?v=)([a-zA-Z0-9]+)/, "https://www.youtube.com/embed/$2"), '_blank');
                     }
                 });
             })
