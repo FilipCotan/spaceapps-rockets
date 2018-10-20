@@ -207,6 +207,32 @@ html, body {
     width: 1em;
 }
 
+.search-bar {
+    height: 60px;
+    width: 100%;
+    padding: 10px;
+    background: "white";
+    border-radius: 10px;
+    box-shadow: 0 10px 40px 0 rgba(0,0,0,0.10),
+    0 10px 40px 0 rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.search-bar-input {
+    width: 90%;
+    height: 100%;
+    
+    border-color: transparent;
+
+}
+.in-line-search-bar{
+    display: flex;
+    height: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
 #status {
     width: 16px;
     height: 16px;

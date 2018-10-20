@@ -22,6 +22,16 @@
     <div class="container-fluid">
         <div class="row" id="container-row">
             <div class="col-md-4 listing-block" id="launches">
+                <div class="search-bar">
+                    <span class="in-line-search-bar">
+                        <input class="search-bar-input" 
+                        placeholder="Search..."/>
+                        <img 
+                            width="20px"
+                            height="20px"
+                        src="https://static.thenounproject.com/png/14173-200.png"/>
+                    </span>
+                </div>
                 @foreach (var launch in Model.launches)
                 {
                     <div class="media" id="@launch.id">
