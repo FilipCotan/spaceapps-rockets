@@ -5,19 +5,6 @@ using System.Threading.Tasks;
 
 namespace RocketLaunchTracker.Data
 {
-    public class Agency
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string abbrev { get; set; }
-        public string countryCode { get; set; }
-        public int type { get; set; }
-        public string infoURL { get; set; }
-        public string wikiURL { get; set; }
-        public string changed { get; set; }
-        public List<string> infoURLs { get; set; }
-    }
-
     public class Pad
     {
         public int id { get; set; }
@@ -46,14 +33,14 @@ namespace RocketLaunchTracker.Data
         public string name { get; set; }
         public string configuration { get; set; }
         public string familyname { get; set; }
-        public List<object> agencies { get; set; }
+        public List<Agency> agencies { get; set; }
         public string wikiURL { get; set; }
-        public List<object> infoURLs { get; set; }
+        public List<string> infoURLs { get; set; }
         public string imageURL { get; set; }
         public List<int> imageSizes { get; set; }
     }
 
-    public class Agency2
+    public class Agency
     {
         public int id { get; set; }
         public string name { get; set; }
@@ -74,8 +61,14 @@ namespace RocketLaunchTracker.Data
         public int type { get; set; }
         public string wikiURL { get; set; }
         public string typeName { get; set; }
-        public List<Agency2> agencies { get; set; }
-        public List<object> payloads { get; set; }
+        public List<Agency> agencies { get; set; }
+        public List<Payload> payloads { get; set; }
+    }
+
+    public class Payload
+    {
+        public int id { get; set; }
+        public string name { get; set; }
     }
 
     public class Lsp
@@ -88,10 +81,10 @@ namespace RocketLaunchTracker.Data
         public string infoURL { get; set; }
         public string wikiURL { get; set; }
         public string changed { get; set; }
-        public List<object> infoURLs { get; set; }
+        public List<string> infoURLs { get; set; }
     }
 
-    public class LaunchInfo
+    public class Launch
     {
         public int id { get; set; }
         public string name { get; set; }
@@ -108,18 +101,26 @@ namespace RocketLaunchTracker.Data
         public int inhold { get; set; }
         public int tbdtime { get; set; }
         public List<object> vidURLs { get; set; }
-        public object vidURL { get; set; }
-        public List<object> infoURLs { get; set; }
+        public string vidURL { get; set; }
+        public List<string> infoURLs { get; set; }
         public string infoURL { get; set; }
-        public object holdreason { get; set; }
+        public string holdreason { get; set; }
         public object failreason { get; set; }
         public int tbddate { get; set; }
         public int probability { get; set; }
-        public object hashtag { get; set; }
+        public string hashtag { get; set; }
         public string changed { get; set; }
         public Location location { get; set; }
         public Rocket rocket { get; set; }
         public List<Mission> missions { get; set; }
         public Lsp lsp { get; set; }
+    }
+
+    public class LaunchInfo
+    {
+        public List<Launch> launches { get; set; }
+        public int total { get; set; }
+        public int offset { get; set; }
+        public int count { get; set; }
     }
 }
