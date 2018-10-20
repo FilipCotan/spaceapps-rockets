@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\RocketLaunchTracker",
+    "\\RocketLaunchTracker\\RocketLaunchTracker",
+    "\\RocketLaunchTracker\\RocketLaunchTracker\\Areas",
+    "\\RocketLaunchTracker\\RocketLaunchTracker\\Areas\\Identity",
+    "\\RocketLaunchTracker\\RocketLaunchTracker\\Areas\\Identity\\Pages",
+    "\\RocketLaunchTracker\\RocketLaunchTracker\\Controllers",
+    "\\RocketLaunchTracker\\RocketLaunchTracker\\Data",
+    "\\RocketLaunchTracker\\RocketLaunchTracker\\Models",
+    "\\RocketLaunchTracker\\RocketLaunchTracker\\Views",
+    "\\RocketLaunchTracker\\RocketLaunchTracker\\Views\\Home"
+  ],
+  "SelectedNode": "\\RocketLaunchTracker\\RocketLaunchTracker.sln",
+  "PreviewInSolutionExplorer": false
+}
