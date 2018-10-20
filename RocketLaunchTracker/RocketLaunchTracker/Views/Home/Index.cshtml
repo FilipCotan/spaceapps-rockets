@@ -26,9 +26,10 @@
             <div class="col-md-4 listing-block" id="launches">
                 @foreach (var launch in Model.launches)
                 {
-                    <div class="media">
+                    <div class="media" id="@launch.id">
                         <div class="fav-box">
                             <div id="status" style="background: @GetStatusCssClass(launch.status);"></div>
+                            <span class="fa fa-heart-o follow" id="follow-@launch.id" onclick='followLaunch("@launch.id")'></span>
                         </div>
                         <img id="launch-image" class="d-flex align-self-start" src="@launch.rocket.imageURL" alt="@launch.rocket.name">
                         <div class="media-body pl-3">
@@ -63,5 +64,16 @@
                 height: '500px'
             });
         });
+
+        function followLaunch(launchId) {
+            var heartId = "follow-" + launchId;
+            $("#" + heartId).removeClass().addClass("fa fa-heart follow");
+
+            $.post("/Home/AddToFavorites/" + launchId, function (data) {
+                //do nothing    
+            }).fail(function (err) {
+                alert(err);
+            });
+        }
     </script>
 }

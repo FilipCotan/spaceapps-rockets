@@ -12,6 +12,7 @@ namespace RocketLaunchTracker.Controllers
     public class HomeController : Controller
     {
         private readonly RocketLaunchService _rocketService;
+        private List<string> _favoritesLaunches = new List<string>();
 
         public HomeController(RocketLaunchService rocketService)
         {
@@ -20,7 +21,7 @@ namespace RocketLaunchTracker.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var launchInfo = await _rocketService.GetNextLaunchesAsync(5);
+            var launchInfo = await _rocketService.GetNextLaunchesAsync(15);
 
             return View(launchInfo);
         }
@@ -30,6 +31,20 @@ namespace RocketLaunchTracker.Controllers
             var launchInfo = await _rocketService.GetNextLaunchesAsync(5);
 
             return View(launchInfo);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddToFavorites(string launchId)
+        {
+            _favoritesLaunches.Add(launchId);
+            const string emailedLaunchId = "1059"; //contains enough information for a testing flow :D 
+
+            if (launchId == emailedLaunchId)
+            {
+                await _rocketService.SendNotificationEmailAsync(launchId);
+            }
+
+            return Ok();
         }
 
 
