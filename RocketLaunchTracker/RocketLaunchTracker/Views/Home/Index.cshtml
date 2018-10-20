@@ -1,7 +1,7 @@
 ﻿@model RocketLaunchTracker.Data.LaunchInfo
 @{
     ViewData["Title"] = "Home Page";
-
+    String apiKey = "AIzaSyB8syvvg1e0faxIN_M5QBMVsTNtoZF7dqI";
 
     string GetStatusCssClass(int status)
     {
@@ -21,7 +21,7 @@
 <section class="search-box">
     <div class="container-fluid">
         <div class="row" id="container-row">
-            <div class="col-md-4 listing-block" id="launches">
+            <div class="col-md-4 listing-block" id="launches">                                
                 @foreach (var launch in Model.launches)
                 {
                     <div class="media" id="@launch.id">
@@ -31,14 +31,16 @@
                         </div>
                         <img id="launch-image" class="d-flex align-self-start" src="@launch.rocket.imageURL" alt="@launch.rocket.name">
                         <div class="media-body pl-3">
-                            <div><strong>
-                                     <a asp-controller="Rocket"
-                                        asp-action="Details" asp-route-id="@launch.id">@launch.name</a>
-                            </strong></div>
+                            <div>
+                                <strong>
+                                    <a asp-controller="Rocket"
+                                       asp-action="Details" asp-route-id="@launch.id">@launch.name</a>
+                                </strong>
+                            </div>
                             <div class="stats">
                                 <span>@launch.location.name</span>
                             </div>
-                            
+
 
                             <div class="address">
                                 <span>
@@ -47,22 +49,31 @@
                             </div>
                         </div>
                     </div>
+
+                    <input type="hidden" id="longitude-@launch.id" name="@launch.id" value="@launch.location.pads.First().longitude" />
+                    <input type="hidden" id="latitude-@launch.id" name="@launch.id" value="@launch.location.pads.First().latitude" />
+                    <input type="hidden" id="name-@launch.id" name="@launch.id" value="@launch.location.name" />
+                    <input type="hidden" id="launchName-@launch.id" name="@launch.id" value="@launch.name" />
+                    <input type="hidden" id="sdate-@launch.id" name="@launch.id" value="@launch.windowstart" />
                 }
 
             </div>
-            <div class="col-md-8 map-box">
-                <iframe width="100%" height="100%" 
-                frameborder="0" scrolling="no"
-                marginheight="0" marginwidth="0" 
-                src="https://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&815&sspn=8.047465,13.666992&ie=UTF8&hq=&hnear=15+Springfield+Way,+Hythe+CT21+5SH,+United+Kingdom&t=m&z=14&ll=51.077429,1.121722&output=embed"></iframe>
-            </div>
+            @{
+                var location = "https://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&815&sspn=8.047465,13.666992&ie=UTF8&hq=&hnear=15+Springfield+Way,+Hythe+CT21+5SH,+United+Kingdom&t=m&z=14&ll=51.077429,1.121722&&q=Space+Needle,Seattle+WA&output=embed";
+            }
+            <div class="col-md-8 map-box" id="map">
+                @*<iframe width="100%" height="100%" 
+                        frameborder="0" scrolling="no"
+                        marginheight="0" marginwidth="0" 
+                        src="https://www.google.com/maps?q=62.929+N,+40.457+E&output=embed"></iframe>*@
+            </div>                                
         </div>
     </div>
 </section>
 
 @section Scripts {
     <script>
-        $(function () {
+        $(function() {
             $('.listing-block').slimScroll({
                 height: '500px'
             });
@@ -72,11 +83,138 @@
             var heartId = "follow-" + launchId;
             $("#" + heartId).removeClass().addClass("fa fa-heart follow");
 
-            $.post("/Home/AddToFavorites/" + launchId, function (data) {
-                //do nothing    
-            }).fail(function (err) {
+            $.post("/Home/AddToFavorites/" + launchId,
+                function(data) {
+                    //do nothing    
+                }).fail(function(err) {
                 alert(err);
             });
         }
+
+        var locations = [];
+
+        function initMap() {            
+            var image = {
+                url: '@Url.Content("~/images/rocket.png")',
+                //url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+                
+                // This marker is 20 pixels wide by 32 pixels high.
+                size: new google.maps.Size(20, 32),
+                //// The origin for this image is (0, 0).
+                //origin: new google.maps.Point(0, 0),
+                //// The anchor for this image is the base of the flagpole at (0, 32).
+                //anchor: new google.maps.Point(0, 32)
+            };                        
+
+            // The location of Uluru            
+            getLocations();
+            var uluru = { lat: parseInt(locations[0].latidude), lng: parseInt(locations[0].longitude)};
+
+            // The map, centered at Uluru
+            var map = new google.maps.Map(
+                document.getElementById('map'),
+                { zoom: 4, center: uluru });
+            // The marker, positioned at Uluru            
+            //var marker;
+            for (var i = 0; i < locations.length; i++) {
+
+                // console.log(locations[i]);
+                var loc = { lat: parseInt(locations[i].latidude), lng: parseInt(locations[i].longitude) };
+                var marker = new google.maps.Marker({
+                    position: loc,
+                    map: map,
+                    icon: image,
+                    animation: google.maps.Animation.DROP,
+                    title: locations[i].name
+                });
+
+                var names = '';
+                for (var j = 0; j < locations[i].launchNames.length && j < 3; j++) {
+                    names += locations[i].launchNames[j] + ' at ' + locations[i].sdates[j] + '<br\>';
+                }
+                if (locations[i].launchNames.length > 3) {
+                    names += 'and so on..';
+                }
+
+                var content =
+                    '<div><strong > ' + locations[i].name +'</strong><br/><br/>' +                        
+                    'There will be ' + locations[i].launchNames.length + ' launches:<br\>' +                        
+                    names +
+                    '</div>';                    
+
+                console.log(content);
+
+                var infowindow = new google.maps.InfoWindow();
+
+           
+                google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
+                    return function() {
+                        infowindow.setContent(content);
+                        infowindow.open(map,marker);
+                    };
+                })(marker,content,infowindow));  
+            }
+        }
+
+        function getLocations() {
+
+            //var longitudes = $("#longitude.*");
+            //var latitudes = $("#latitude.*");
+
+            var longitudes = [];
+            var latitudes = [];
+            var names = [];
+            var launchNames = [];
+            var sdates = [];
+                        
+            jQuery('input[id*=longitude]').each(function(index, el) {                
+                longitudes.push(el.value);
+            });
+
+            jQuery('input[id*=latitude]').each(function(index, el) {                
+                latitudes.push(el.value);
+            });
+
+
+            jQuery('input[id*=name]').each(function (index, el) {
+                names.push(el.value);
+            });
+
+            jQuery('input[id*=launchName]').each(function (index, el) {
+                launchNames.push(el.value);
+            });
+
+            jQuery('input[id*=sdate]').each(function (index, el) {
+                sdates.push(el.value);
+            });
+
+            
+            for (let i = 0; i < latitudes.length; i++) {                
+                var location = {
+                    latidude: latitudes[i],
+                    longitude: longitudes[i],                    
+                    name: names[i]
+                };                
+                locations.push(location);
+            }
+
+            for (let i = 0; i < locations.length; i++) {                
+                var launchNamesCurrent = [];
+                var sdatesCurrent = [];
+                for (let j = 0; j < locations.length; j++) {
+                    if (locations[i].name === locations[j].name) {
+                        launchNamesCurrent.push(launchNames[j]);
+                        sdatesCurrent.push(sdates[j]);
+                    }
+                }
+                locations[i].launchNames = launchNamesCurrent;
+                locations[i].sdates = sdatesCurrent;
+                console.log(locations[i]);
+            }
+        }
+        
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8syvvg1e0faxIN_M5QBMVsTNtoZF7dqI&callback=initMap">
     </script>
 }
