@@ -18,7 +18,7 @@
 <div class="col-md-12 " id="item-page">
     <div class="media" id="title-launch-item-page">
         <div class="col-md-3">
-            <img height="40" width="40" class="d-flex align-self-start" src="@Model.rocket.imageURL" alt="@Model.rocket.name">
+            <img height="140" class="d-flex align-self-start" src="@Model.rocket.imageURL" alt="@Model.rocket.name">
         </div>
         <div class="col-md-6">
             <div class="media-body pl-3">
@@ -28,7 +28,6 @@
                         <h5>@Model.location.pads.First().agencies.First().name</h5>
                     }
                 }
-
                 <h4>@Model.name</h4>
                 <div class="stats">
                     <span><i class="fa fa-arrows-alt"></i>@Model.location.name</span>
@@ -45,7 +44,6 @@
             <i class="fab fa-facebook-f"></i>
         </div>
         <div class="col-md-2">
-            
             <div class="status">
                  @{
                     if (Model.status == 1) { <h5 id="status-green" class="status-label">GREEN</h5> }
@@ -63,14 +61,23 @@
     @* Rocket item *@
     <div class="col-lg-4">
         <div class="card h-100 w-100">
-            <img height="40" width="40" class="img-thumbnail" src="@Model.rocket.imageURL" alt="" />
+            <img height="100" class="img-thumbnail"
+                 src="@Model.rocket.imageURL" alt="" />
             <div class="card-body">
+
+           
                 <h4 class="card-title">
                     ROCKET NAME
                 </h4>
                 <h3 class="card-title">
                     @Model.rocket.name
                 </h3>
+                <h6>@{
+                    if (Model.rocket.wikiURL != null) {
+                        <a href="@Model.rocket.wikiURL">Wikipedia</a>
+                    }
+                }
+                </h6>
             </div>
         </div>
     </div>
@@ -86,9 +93,9 @@
                 <h4 class="card-title">
                     LOCATION
                 </h4>
-                <h2>
+                <h4>
                     @Model.location.name
-                </h2>
+                </h4>
             </div>
         </div>
     </div>
@@ -161,10 +168,10 @@
                         <h4 class="card-title">
                             MISSION
                         </h4>
-                        <h2 class="card-subtitle">
+                        <h4 class="card-subtitle">
                             <strong>@mission.name</strong>
-                        </h2>
-                        <p>
+                        </h4>
+                        <p class="description-style-cool">
                             @mission.description
                         </p>
                         <h6>@mission.typeName</h6>
@@ -183,9 +190,9 @@
                              <h4 class="card-title">
                                  PAYLOAD
                              </h4>
-                             <h2>
+                             <h4>
                                  @mission.payloads.First().name
-                             </h2>
+                             </h4>
                          </div>
                      </div>
                  </div>

@@ -70,9 +70,9 @@ h2 {
 }
 
 .media img {
-    width: 200px;
+    /* width: 200px;
     margin: 0;
-    height: 200px;
+    height: 200px; */
 }
 
 #launch-image {
@@ -180,6 +180,23 @@ html, body {
     overflow: hidden; 
     white-space: nowrap;
 }
+
+.img-thumbnail {
+    height: 200px;
+    clip: rect(100px, 100px, 100px, 100px);
+    /* width: 100%; */
+    padding: 40px !important;
+    border-color: transparent;
+    border: 0 !important;
+}
+
+.description-style-cool {
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    line-height: 26px;
+}
+
 .fab {
     padding: 10px;
 }

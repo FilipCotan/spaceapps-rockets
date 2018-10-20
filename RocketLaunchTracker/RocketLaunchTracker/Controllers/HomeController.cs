@@ -21,7 +21,7 @@ namespace RocketLaunchTracker.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var launchInfo = await _rocketService.GetNextLaunchesAsync(15);
+            var launchInfo = await _rocketService.GetNextLaunchesAsync(40);
 
             return View(launchInfo);
         }
