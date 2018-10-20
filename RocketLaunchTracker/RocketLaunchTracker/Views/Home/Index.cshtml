@@ -38,7 +38,7 @@
                     <div class="media" id="@launch.id">
                         <div class="fav-box">
                             <div id="status" style="background: @GetStatusCssClass(launch.status);"></div>
-                            <span class="fa fa-heart-o follow" id="follow-@launch.id" onclick='followLaunch("@launch.id")'></span>
+                            <span class="fa-follow" id="follow-@launch.id" onclick='followLaunch("@launch.id")'>Follow</span>
                         </div>
                         <img id="launch-image" class="d-flex align-self-start" src="@launch.rocket.imageURL" alt="@launch.rocket.name">
                         <div class="media-body pl-3">
@@ -49,8 +49,6 @@
                             <div class="stats">
                                 <span>@launch.location.name</span>
                             </div>
-                            
-
                             <div class="address">
                                 <span>
                                     @Convert.ToDateTime(launch.windowstart.Replace("UTC", string.Empty).Trim())
@@ -82,10 +80,9 @@
          
 
             var heartId = "follow-" + launchId;
-            $("#" + heartId).removeClass().addClass("fa fa-heart follow");
+            $("#" + heartId).removeClass().addClass("fa-followed").text("Following");
             if(launchId === "1059" || launchId === "1065")
             $.get("https://launchlibrary.net/1.3/launch/" + launchId, function(data) {
-                
                   Push.create("Rocket Launch Comming Soon!", {
                     body: data.launches[0].rocket.name + (launchId === "1059" ? " is launching in 30 minutes!" : " is has been delayed for 7 day!"),
                     icon: data.launches[0].rocket.imageURL,
