@@ -135,6 +135,9 @@
                                 </li>
                             }
                         </ul>
+                        <div class="follow-container">
+                            <span style="cursor: pointer; margin-top: 55px;" class="fa-follow" id="follow-@agency.id" onclick='followAgency("@agency.id")'>Follow</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -205,3 +208,23 @@
 
 </div>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function followAgency(agencyId) {
+            $("#follow-" + agencyId).removeClass().addClass("fa-followed").text("Following");
+
+            $.get("https://launchlibrary.net/1.4/launch/next/1?lsp=" + agencyId, function (data) {
+                Push.create("Next rocket launch...", {
+                    body: data.launches[0].rocket.name + " is launching their next rocket on !" + data.launches[0].rocket.windowstart,
+                    icon: data.launches[0].rocket.imageURL,
+                    timeout: 4000,
+                    onClick: function () {
+                        window.open(data.launches[0].vidURLs[0]
+                            .replace(/(.*?v=)([a-zA-Z0-9]+)/, "https://www.youtube.com/embed/$2"), '_blank');
+                    }
+                });
+            });
+        }
+    </script>
+}

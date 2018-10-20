@@ -38,7 +38,7 @@
                     <div class="media" id="@launch.id">
                         <div class="fav-box">
                             <div id="status" style="background: @GetStatusCssClass(launch.status);"></div>
-                            <span class="fa-follow" id="follow-@launch.id" onclick='followLaunch("@launch.id")'>Follow</span>
+                            <span style="cursor: pointer;" class="fa-follow" id="follow-@launch.id" onclick='followLaunch("@launch.id")'>Follow</span>
                         </div>
                         <img id="launch-image" class="d-flex align-self-start" src="@launch.rocket.imageURL" alt="@launch.rocket.name">
                         <div class="media-body pl-3">
