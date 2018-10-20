@@ -30,17 +30,14 @@
                         <div class="fav-box">
                             <div id="status" style="background: @GetStatusCssClass(launch.status);"></div>
                         </div>
-                        <img class="d-flex align-self-start" src="@launch.rocket.imageURL" alt="@launch.rocket.name">
+                        <img id="launch-image" class="d-flex align-self-start" src="@launch.rocket.imageURL" alt="@launch.rocket.name">
                         <div class="media-body pl-3">
-                            <div>
-                                <strong>@launch.name</strong>
-                            </div>
                             <div class="stats">
-                                <span><i class="fa fa-globe"></i>@launch.location.name</span>
+                                <span>@launch.location.name</span>
                             </div>
+                            <div><strong>@launch.name</strong></div>
                             <div class="address">
                                 <span>
-                                    <i class="fa fa-calendar"></i>
                                     @Convert.ToDateTime(launch.windowstart.Replace("UTC", string.Empty).Trim())
                                 </span>
                             </div>
@@ -50,7 +47,10 @@
 
             </div>
             <div class="col-md-8 map-box">
-                <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&815&sspn=8.047465,13.666992&ie=UTF8&hq=&hnear=15+Springfield+Way,+Hythe+CT21+5SH,+United+Kingdom&t=m&z=14&ll=51.077429,1.121722&output=embed"></iframe>
+                <iframe width="100%" height="100%" 
+                frameborder="0" scrolling="no"
+                marginheight="0" marginwidth="0" 
+                src="https://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&815&sspn=8.047465,13.666992&ie=UTF8&hq=&hnear=15+Springfield+Way,+Hythe+CT21+5SH,+United+Kingdom&t=m&z=14&ll=51.077429,1.121722&output=embed"></iframe>
             </div>
         </div>
     </div>
