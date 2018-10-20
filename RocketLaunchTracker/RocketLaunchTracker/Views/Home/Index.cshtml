@@ -82,7 +82,7 @@
             var heartId = "follow-" + launchId;
             $("#" + heartId).removeClass().addClass("fa fa-heart follow");
 
-            $.post("/Home/AddToFavorites/" + launchId, function (data) {
+            $.post("/Home/AddToFavorites?launchId=" + launchId, function (data) {
                 //do nothing    
             }).fail(function (err) {
                 alert(err);

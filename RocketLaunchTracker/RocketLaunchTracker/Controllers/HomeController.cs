@@ -37,12 +37,18 @@ namespace RocketLaunchTracker.Controllers
         public async Task<IActionResult> AddToFavorites(string launchId)
         {
             _favoritesLaunches.Add(launchId);
-            const string emailedLaunchId = "1059"; //contains enough information for a testing flow :D 
+            const string reminderEmailedLaunchId = "1059"; //contains enough information for a testing flow :D 
+            const string delayedEmailedLaunchId = "1065";
 
-            //if (launchId == emailedLaunchId)
-            //{
-            //    await _rocketService.SendNotificationEmailAsync(launchId);
-            //}
+            if (launchId == reminderEmailedLaunchId)
+            {
+                await _rocketService.SendReminderNotificationEmailAsync(Convert.ToInt32(launchId));
+            }
+
+            if (launchId == delayedEmailedLaunchId)
+            {
+                await _rocketService.SendDelayedNotificationEmailAsync(Convert.ToInt32(launchId));
+            }
 
             return Ok();
         }

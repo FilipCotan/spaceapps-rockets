@@ -3,7 +3,10 @@ using RocketLaunchTracker.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace RocketLaunchTracker.Services
@@ -38,10 +41,90 @@ namespace RocketLaunchTracker.Services
             }
         }
 
-        //internal Task SendNotificationEmailAsync(string launchId)
-        //{
-            
-        //}
+        public async Task SendReminderNotificationEmailAsync(int launchId)
+        {
+            var launchObject = await GetLaunchAsync(launchId);
+            string liveVideoEmbeddedUrl = ConvertToEmbeddedLink(launchObject.vidURLs?.First()?.ToString());
+
+            var emailBody = new StringBuilder();
+            emailBody.AppendLine("Rocket launch info");
+            emailBody.AppendLine();
+            emailBody.AppendLine($"Name: {launchObject.name}");
+            emailBody.AppendLine($"Rocket: {launchObject.rocket.name}");
+            emailBody.AppendLine($"Location: {launchObject.location.name}");
+            emailBody.AppendLine($"Time: {launchObject.windowstart}");
+            emailBody.AppendLine();
+            emailBody.AppendLine($"Live URL: {liveVideoEmbeddedUrl}");
+
+            var emailSubject = $"Rocket launch alert from {launchObject.name}";
+
+            SendEmail(emailSubject, emailBody.ToString());
+        }
+
+        public async Task SendDelayedNotificationEmailAsync(int launchId)
+        {
+            var launchObject = await GetLaunchAsync(launchId);
+            string liveVideoEmbeddedUrl = ConvertToEmbeddedLink(launchObject.vidURLs?.First()?.ToString());
+            var delayedLaunchDate = Convert.ToDateTime(launchObject.windowstart.Replace("UTC", string.Empty).Trim()).AddDays(9);
+
+            var emailBody = new StringBuilder();
+            emailBody.AppendLine("Delayed Rocket Launch Info");
+            emailBody.AppendLine();
+            emailBody.AppendLine($"Name: {launchObject.name}");
+            emailBody.AppendLine($"Rocket: {launchObject.rocket.name}");
+            emailBody.AppendLine($"Location: {launchObject.location.name}");
+            emailBody.AppendLine();
+            emailBody.AppendLine("  --------------------------------------------------------------------");
+            emailBody.AppendLine($"|  Delayed Time: {delayedLaunchDate.ToLongDateString()} {delayedLaunchDate.ToLongTimeString()} |");
+            emailBody.AppendLine("  --------------------------------------------------------------------");
+            emailBody.AppendLine();
+            emailBody.AppendLine($"Live URL: {liveVideoEmbeddedUrl}");
+
+            var emailSubject = $"Delayed rocket launch alert from {launchObject.name}";
+
+            SendEmail(emailSubject, emailBody.ToString());
+        }
+
+        private string ConvertToEmbeddedLink(string link)
+        {
+            if (link == null)
+            {
+                return string.Empty;
+            }
+
+            const string pattern = "?v=";
+            int videoIdIndex = link.IndexOf(pattern) + pattern.Length;
+
+            string videoId = link.Substring(videoIdIndex, link.Length - videoIdIndex);
+
+            return $"https://www.youtube.com/embed/{videoId}";
+        }
+
+        private void SendEmail(string subject, string body)
+        {
+            try
+            {
+                var client = new SmtpClient("smtp.gmail.com")
+                {
+                    UseDefaultCredentials = false,
+                    //Please don't mess up with this email account. Grately appreciated.
+                    Credentials = new NetworkCredential("rocketpathspaceapps@gmail.com", "SpaceAppsChallenge2018"),
+                    EnableSsl = true
+                };
+
+                var mailMessage = new MailMessage();
+                mailMessage.From = new MailAddress("rocketpathspaceapps@gmail.com");
+                mailMessage.To.Add("philipcotan@yahoo.com");
+                mailMessage.Body = body;
+                mailMessage.Subject = subject;
+                client.Send(mailMessage);
+            }
+            catch (Exception e)
+            {
+                var message = e.Message;
+                //log error
+            }
+        }
 
         private List<SpacePort> GetSpacePorts()
         {
