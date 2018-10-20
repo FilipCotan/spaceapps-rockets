@@ -39,10 +39,10 @@ namespace RocketLaunchTracker.Controllers
             _favoritesLaunches.Add(launchId);
             const string emailedLaunchId = "1059"; //contains enough information for a testing flow :D 
 
-            if (launchId == emailedLaunchId)
-            {
-                await _rocketService.SendNotificationEmailAsync(launchId);
-            }
+            //if (launchId == emailedLaunchId)
+            //{
+            //    await _rocketService.SendNotificationEmailAsync(launchId);
+            //}
 
             return Ok();
         }

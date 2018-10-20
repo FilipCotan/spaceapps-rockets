@@ -38,10 +38,10 @@ namespace RocketLaunchTracker.Services
             }
         }
 
-        internal Task SendNotificationEmailAsync(string launchId)
-        {
+        //internal Task SendNotificationEmailAsync(string launchId)
+        //{
             
-        }
+        //}
 
         private List<SpacePort> GetSpacePorts()
         {
