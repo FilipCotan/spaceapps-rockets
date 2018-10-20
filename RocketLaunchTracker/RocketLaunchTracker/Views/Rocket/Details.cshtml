@@ -13,7 +13,7 @@
 
 
 
-<div class="container-fluid">
+<div class="container-fluid" id="details-screen-full">
 <div class="row">
 <div class="col-md-12 " id="item-page">
     <div class="media" id="title-launch-item-page">
@@ -100,8 +100,6 @@
 
     @* Agency item *@
     @{
-
-
         if (@Model.location.pads.FirstOrDefault()?.agencies?.Count > 0)
         {
             var agency = @Model.location.pads.First().agencies.First();
