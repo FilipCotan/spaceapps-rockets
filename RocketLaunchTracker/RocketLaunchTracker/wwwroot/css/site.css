@@ -196,6 +196,16 @@ html, body {
     background: transparent;
 }
 
+#timer {
+    margin-top: 60px;
+    font-size: 40pt;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+}
+
 ::-webkit-scrollbar-thumb {
     background: #FF0000;
 }
