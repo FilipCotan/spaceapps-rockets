@@ -140,7 +140,7 @@ h2 {
 .map-box {
     height: 100%;
     width: 100%;
-    padding: 0 !important;
+    padding: 0 !important
 
     /* background-color: #A3CCFF; */
 }
@@ -163,6 +163,15 @@ html, body {
     min-height: 100%;
     overflow-y: hidden; /* don't show content that exceeds my height */
     background-color: fadeout(@studio-bar-color, @studio-block-film-trans-delta);   
+}
+
+::-webkit-scrollbar {
+    width: 0px; 
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
 }
 
 #container-row {
