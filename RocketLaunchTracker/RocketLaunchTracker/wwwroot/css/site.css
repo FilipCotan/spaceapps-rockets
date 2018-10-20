@@ -254,9 +254,11 @@ html, body {
 #details-screen-full{ 
     overflow: scroll;
 }
-.row{
-    padding-top:10px;
+
+#cards-grid {
+    padding: 20px;
 }
+
 #container-row {
     height: 100%;
 }
