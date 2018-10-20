@@ -140,8 +140,7 @@ h2 {
 .map-box {
     height: 100%;
     width: 100%;
-    padding-left: "-15px" !important;
-    padding-right: "-15px" !important;
+    padding: 0 !important;
 
     /* background-color: #A3CCFF; */
 }
