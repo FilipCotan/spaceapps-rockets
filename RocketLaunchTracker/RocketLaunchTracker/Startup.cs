@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using RocketLaunchTracker.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RocketLaunchTracker.Services;
 
 namespace RocketLaunchTracker
 {
@@ -39,6 +40,8 @@ namespace RocketLaunchTracker
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<RocketLaunchService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

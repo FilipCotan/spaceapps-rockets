@@ -5,11 +5,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RocketLaunchTracker.Models;
+using RocketLaunchTracker.Services;
 
 namespace RocketLaunchTracker.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly RocketLaunchService _rocketService;
+
+        public HomeController(RocketLaunchService rocketService)
+        {
+            _rocketService = rocketService;
+        }
+
         public IActionResult Index()
         {
             return View();
