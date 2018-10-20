@@ -72,8 +72,9 @@
                 <h3 class="card-title">
                     @Model.rocket.name
                 </h3>
-                <h6>@{
+                <h6 class="special_link">@{
                     if (Model.rocket.wikiURL != null) {
+        
                         <a href="@Model.rocket.wikiURL">Wikipedia</a>
                     }
                 }
@@ -126,11 +127,12 @@
                         <h3 class="card-subtitle">
                             @agency.name
                         </h3>
-                        Useful links:
-                        <ul>
+                        <ul class="list_links">
                             @foreach (var url in agency.infoURLs)
                             {
-                                <li><a href="@url">@url</a></li>
+                                <li class="special_link">
+                                    <a href="@url">@url</a>
+                                </li>
                             }
                         </ul>
                     </div>
