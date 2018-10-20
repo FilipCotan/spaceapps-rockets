@@ -33,10 +33,15 @@
                         </div>
                         <img id="launch-image" class="d-flex align-self-start" src="@launch.rocket.imageURL" alt="@launch.rocket.name">
                         <div class="media-body pl-3">
+                            <div><strong>
+                                     <a asp-controller="Rocket"
+                                        asp-action="Details" asp-route-id="@launch.id">@launch.name</a>
+                            </strong></div>
                             <div class="stats">
                                 <span>@launch.location.name</span>
                             </div>
-                            <div><strong>@launch.name</strong></div>
+                            
+
                             <div class="address">
                                 <span>
                                     @Convert.ToDateTime(launch.windowstart.Replace("UTC", string.Empty).Trim())

@@ -15,10 +15,10 @@ namespace RocketLaunchTracker.Controllers
         {
             _rocketService = rocketService;
         }
-
-        public async Task<IActionResult> Details()
+        
+        public async Task<IActionResult> Details(int id)
         {
-            var launch = await _rocketService.GetLaunchAsync(1636);
+            var launch = await _rocketService.GetLaunchAsync(id);
 
             return View(launch);
         }
