@@ -195,10 +195,24 @@ html, body {
 #status-success{    
     background-color: #c3f1ff;
 }
+
 #status-fail{    
     background-color: black;
     color:white;
 }
+
+.card-body {
+    text-align: center !important; 
+    justify-content: space-around;  
+}
+.card-title {
+    font-weight: 800;
+}
+.card-subtitle {
+    font-weight: 600;
+
+}
+
 .social-buttons {
     display: flex;
     align-items: center;

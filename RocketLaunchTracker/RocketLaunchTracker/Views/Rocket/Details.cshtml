@@ -66,7 +66,7 @@
             <img height="40" width="40" class="img-thumbnail" src="@Model.rocket.imageURL" alt="" />
             <div class="card-body">
                 <h4 class="card-title">
-                    Rocket
+                    ROCKET NAME
                 </h4>
                 <h3 class="card-title">
                     @Model.rocket.name
@@ -84,7 +84,7 @@
             src="https://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&815&sspn=8.047465,13.666992&ie=UTF8&hq=&hnear=15+Springfield+Way,+Hythe+CT21+5SH,+United+Kingdom&t=m&z=14&ll=51.077429,1.121722&output=embed"></iframe>
             <div class="card-body">
                 <h4 class="card-title">
-                    Location
+                    LOCATION
                 </h4>
                 <h2>
                     @Model.location.name
@@ -99,7 +99,7 @@
             <iframe width="100%" height="100%" src="@(Model.vidURL == null ? "https://www.youtube.com/embed/5TlrscfERDU" :  Model.vidURL)" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             <div class="card-body">
                 <h4 class="card-title">
-                    Rocket launch
+                    YOUTUBE VIDEO
                 </h4>
             </div>
         </div>
@@ -114,9 +114,9 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <h4 class="card-title">
-                            Agency
+                            AGENCY
                         </h4>
-                        <h3 class="card-title">
+                        <h3 class="card-subtitle">
                             @agency.name
                         </h3>
                         Useful links:
@@ -139,11 +139,11 @@
             <div class="card h-100">
                 <div class="card-body">
                     <h4 class="card-title">
-                        Fail reason
+                        FAIL REASON
                     </h4>
-                    <h3>
+                    <h4 class="card-subtitle">
                         @Model.failreason
-                    </h3>
+                    </h4>
                     <h4>Probability: @Model.probability</h4>
                 </div>
             </div>
@@ -158,16 +158,16 @@
             <div class="col-lg-4 col-sm-6 ">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h2 class="card-title">
-                            Mission
-                        </h2>
-                        <h2 class="card-title">
+                        <h4 class="card-title">
+                            MISSION
+                        </h4>
+                        <h2 class="card-subtitle">
                             <strong>@mission.name</strong>
                         </h2>
                         <p>
                             @mission.description
                         </p>
-                        <h5>@mission.typeName</h5>
+                        <h6>@mission.typeName</h6>
                     </div>
                 </div>
             </div>
@@ -181,7 +181,7 @@
                      <div class="card h-100">
                          <div class="card-body">
                              <h4 class="card-title">
-                                 Payload
+                                 PAYLOAD
                              </h4>
                              <h2>
                                  @mission.payloads.First().name
