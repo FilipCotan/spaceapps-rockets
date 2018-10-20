@@ -18,9 +18,11 @@ namespace RocketLaunchTracker.Controllers
             _rocketService = rocketService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var launchInfo = await _rocketService.GetNextLaunchesAsync(5);
+
+            return View(launchInfo);
         }
 
         public IActionResult About()
