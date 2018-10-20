@@ -169,6 +169,24 @@ html, body {
 #container-row {
     height: 100%;
 }
+#item-page {
+    padding: 0px !important;
+}
+
+#title-launch-item-page {
+    display: flex;
+    box-shadow: 0 10px 40px 0 rgba(0,0,0,0.10),
+                0 10px 40px 0 rgba(0,0,0,0.05);
+    border-radius: 0px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    background: #fff;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    height: 100%;
+}
 
 #launches {
     height: 100%;
@@ -177,6 +195,10 @@ html, body {
 .container-fluid {
     height: 937px;
     overflow-y: hidden; /* don't show content that exceeds my height */
+}
+
+.card-body {
+    margin: 10px;
 }
 
 .fa-chevron-circle-up {
@@ -197,7 +219,7 @@ html, body {
     margin-top: 47px;
     cursor: pointer;
 }
-}
+
 
 #address {
     width: 16px;

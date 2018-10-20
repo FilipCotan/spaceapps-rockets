@@ -15,8 +15,8 @@
 
 <div class="container-fluid">
 <div class="row">
-<div class="col-md-12 ">
-    <div class="media">
+<div class="col-md-12 " id="item-page">
+    <div class="media" id="title-launch-item-page">
         <div class="col-md-3">
             <img height="40" width="40" class="d-flex align-self-start" src="@Model.rocket.imageURL" alt="@Model.rocket.name">
         </div>
@@ -54,8 +54,8 @@
 
 <div class="row">
     @* Rocket item *@
-    <div class="col-lg-4 col-sm-6">
-        <div class="card h-100">
+    <div class="col-lg-4">
+        <div class="card h-100 w-100">
             <img height="40" width="40" class="img-thumbnail" src="@Model.rocket.imageURL" alt="" />
             <div class="card-body">
                 <h4 class="card-title">
@@ -71,7 +71,10 @@
     @* Location item *@
     <div class="col-lg-4 col-sm-6">
         <div class="card h-100">
-            <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&815&sspn=8.047465,13.666992&ie=UTF8&hq=&hnear=15+Springfield+Way,+Hythe+CT21+5SH,+United+Kingdom&t=m&z=14&ll=51.077429,1.121722&output=embed"></iframe>
+            <iframe width="100%" height="100%" 
+            frameborder="" scrolling="no" 
+            marginheight="0" marginwidth="0" 
+            src="https://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&815&sspn=8.047465,13.666992&ie=UTF8&hq=&hnear=15+Springfield+Way,+Hythe+CT21+5SH,+United+Kingdom&t=m&z=14&ll=51.077429,1.121722&output=embed"></iframe>
             <div class="card-body">
                 <h4 class="card-title">
                     Location
