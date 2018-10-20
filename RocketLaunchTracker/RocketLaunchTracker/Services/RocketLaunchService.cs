@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using RocketLaunchTracker.Data;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -36,6 +34,14 @@ namespace RocketLaunchTracker.Services
 
                 return launch.launches.First();
             }
+        }
+
+
+        private string GetSpacePorts()
+        {
+            var jsonString = "";
+
+            return jsonString;
         }
     }
 }

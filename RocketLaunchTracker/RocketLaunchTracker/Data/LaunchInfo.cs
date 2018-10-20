@@ -122,5 +122,10 @@ namespace RocketLaunchTracker.Data
         public int total { get; set; }
         public int offset { get; set; }
         public int count { get; set; }
+
+        internal void ToList()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

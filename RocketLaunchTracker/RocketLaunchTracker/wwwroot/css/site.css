@@ -1,40 +1,5 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
-body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
-}
-
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
-}
-
-/* QR code generator */
-#qrCode {
-    margin: 15px;
-}
-
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
-}
 
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 @import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700');
@@ -65,11 +30,6 @@ h2 {
         font-weight: bold;
     }
 
-body {
-    background: #24C6DC; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to bottom, #514A9D, #24C6DC); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #514A9D, #24C6DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
 
 .head {
     float: left;
@@ -77,7 +37,8 @@ body {
 }
 
 .search-box {
-    width: 90%;
+    height: 100%;
+    width: 100%;
     margin: 0 auto 40px;
     box-shadow: 10px 13px 0 rgba(0,0,0,0.2);
 }
@@ -94,19 +55,35 @@ body {
 }
 
 .media {
+    display: flex;
+    box-shadow: 0 10px 40px 0 rgba(0,0,0,0.10),
+                0 10px 40px 0 rgba(0,0,0,0.05);
+    border-radius: 10px;
     background: #fff;
+    height: 100px;
+    justify-content: center;
+    align-content: center;
+    align-content: center;
+    padding: 10px;
     position: relative;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
-    .media img {
-        width: 200px;
-        margin: 0;
-        height: 136px;
-    }
+.media img {
+    width: 200px;
+    margin: 0;
+    height: 200px;
+}
+
+#launch-image {
+    border-radius: 10px;
+    width: 80px;
+    height: 80px;
+}
 
 .media-body {
-    border: 1px solid #bcbcbc;
+    display: flex;
+    flex-direction: column;
     border-left: 0;
     height: 136px;
 }
@@ -119,11 +96,11 @@ body {
     color: #4765AB;
 }
 
-    .media .price small {
-        display: block;
-        font-size: 17px;
-        color: #232323;
-    }
+.media .price small {
+    display: block;
+    font-size: 17px;
+    color: #232323;
+}
 
 .media .stats {
     float: left;
@@ -131,16 +108,17 @@ body {
     margin-top: 10px;
 }
 
-    .media .stats span {
-        float: left;
-        margin-right: 10px;
-        font-size: 15px;
-    }
+.media .stats span {
+    float: left;
+    margin-right: 10px;
+    font-size: 15px;
+}
 
-        .media .stats span i {
-            margin-right: 7px;
-            color: #4765AB;
-        }
+
+.media .stats span i {
+    color: #4765AB;
+    margin-right: 7px;
+}
 
 .media .address {
     float: left;
@@ -151,6 +129,7 @@ body {
 }
 
 .media .fav-box {
+
     position: absolute;
     right: 10px;
     font-size: 20px;
@@ -159,5 +138,60 @@ body {
 }
 
 .map-box {
-    background-color: #A3CCFF;
+    height: 100%;
+    width: 100%;
+    padding-left: "-15px" !important;
+    padding-right: "-15px" !important;
+
+    /* background-color: #A3CCFF; */
+}
+
+html, body {
+    height: 100%;
+}
+.container-fluid {
+    height: 100%;
+    overflow-y: hidden; /* don't show content that exceeds my height */
+}
+
+.body-film {
+    height: 100%;
+    overflow-y: auto;
+    background-color: fadeout(@studio-bar-color, @studio-body-film-trans-delta);
+}
+
+.block-film {
+    min-height: 100%;
+    overflow-y: hidden; /* don't show content that exceeds my height */
+    background-color: fadeout(@studio-bar-color, @studio-block-film-trans-delta);   
+}
+
+#container-row {
+    height: 100%;
+}
+
+#launches {
+    height: 100%;
+}
+
+.container-fluid {
+    height: 800px;
+    overflow-y: hidden; /* don't show content that exceeds my height */
+}
+
+.fa-chevron-circle-up {
+    border-radius: 50%;
+    height: 1em;
+    width: 1em;
+}
+
+#status {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+}
+
+#address {
+    width: 16px;
+    height: 16px;
 }
