@@ -174,6 +174,13 @@ html, body {
     background: #FF0000;
 }
 
+.launch-name-label {
+    width: 340px;
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    white-space: nowrap;
+}
+
 #container-row {
     height: 100%;
 }
