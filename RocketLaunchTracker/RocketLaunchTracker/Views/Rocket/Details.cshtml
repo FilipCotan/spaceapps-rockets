@@ -25,11 +25,11 @@
                 @{
                     if (Model.location.pads.FirstOrDefault() != null && Model.location.pads.First().agencies != null && Model.location.pads.First().agencies.FirstOrDefault() != null)
                     {
-                        <h2>@Model.location.pads.First().agencies.First().name</h2>
+                        <h5>@Model.location.pads.First().agencies.First().name</h5>
                     }
                 }
 
-                <h3>@Model.name</h3>
+                <h4>@Model.name</h4>
                 <div class="stats">
                     <span><i class="fa fa-arrows-alt"></i>@Model.location.name</span>
                 </div>
@@ -39,13 +39,20 @@
 
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="social-buttons">
             <i class="fab fa-twitter"></i>
             <i class="fab fa-google"></i>
             <i class="fab fa-facebook-f"></i>
-            <i class="far fa-flag"></i>
+        </div>
+        <div class="col-md-2">
+            
             <div class="status">
-                Status: @Model.status
+                 @{
+                    if (Model.status == 1) { <h5 id="status-green" class="status-label">GREEN</h5> }
+                    if (Model.status == 2) { <h5 id="status-red" class="status-label">RED</h5> }
+                    if (Model.status == 3) { <h5 id="status-success" class="status-label">SUCCESS</h5> }
+                    if (Model.status == 4) { <h5 id="status-fail" class="status-label">FAIL</h5> }
+                }
             </div>
         </div>
     </div>

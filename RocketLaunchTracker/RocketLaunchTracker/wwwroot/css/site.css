@@ -180,7 +180,37 @@ html, body {
     overflow: hidden; 
     white-space: nowrap;
 }
+.fab {
+    padding: 10px;
+}
 
+#status-green{    
+    background-color: #6ef7c8;
+}
+
+#status-red{    
+    background-color: #ff6473;
+}
+
+#status-success{    
+    background-color: #c3f1ff;
+}
+#status-fail{    
+    background-color: black;
+    color:white;
+}
+.social-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.status-label {
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .col-lg-4{
     padding:10px
 }
