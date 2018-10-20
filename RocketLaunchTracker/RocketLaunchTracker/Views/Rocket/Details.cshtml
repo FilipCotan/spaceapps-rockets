@@ -159,6 +159,26 @@
         </div>
     }
 
+       @* Buy Tickets *@
+        <div class="col-lg-4 col-sm-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            BUY TICKETS
+                        </h4>
+                        <div class="description-style-cool">
+                            Tickets are available for purchase online and at the visitor complex when you arrive.
+                            Advance purchase for add-on enhancements, including special interest tours, 
+                            is recommended since these experiences can sell out before the scheduled date.
+                        </div>
+                        <h4 class="fa-follow" onclick="buyTickets()">
+                            BUY TICKETS
+                        </h4>
+                    </div>
+                </div>
+            </div>
+
+
     @* Mission item *@
     @{
         var mission = Model.missions.FirstOrDefault();
@@ -205,3 +225,13 @@
 
 </div>
 </div>
+
+
+@section Scripts {
+    <script>
+
+        function buyTickets() {
+            window.open('https://www.kennedyspacecenter.com/info/tickets','_blank'); 
+        }
+    </script>
+}
