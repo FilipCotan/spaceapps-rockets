@@ -25,6 +25,14 @@ namespace RocketLaunchTracker.Controllers
             return View(launchInfo);
         }
 
+        public async Task<IActionResult> List()
+        {
+            var launchInfo = await _rocketService.GetNextLaunchesAsync(5);
+
+            return View(launchInfo);
+        }
+
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

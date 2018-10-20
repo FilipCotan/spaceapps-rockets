@@ -1,0 +1,50 @@
+﻿@using RocketLaunchTracker.Data
+@model RocketLaunchTracker.Data.LaunchInfo
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "List";
+}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+<h2>List</h2>
+<div class="container">
+    <div class="col-2">
+
+
+        <input type="text" placeholder="Search for launches.." />
+        <div>
+            @* List of launches *@
+            @foreach (var launch in Model.launches)
+            {
+                <div class="media">
+                    <div class="fav-box">
+                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                    </div>
+                    <img class="d-flex align-self-start" src="@launch.rocket.imageURL" alt="@launch.rocket.name">
+                    <div class="media-body pl-3">
+                        <div>@launch.name</div>
+                        <div class="stats">
+                            <span><i class="fa fa-arrows-alt"></i>@launch.location.name</span>                            
+                        </div>
+                        <div class="address">
+                            @launch.tbddate
+                        </div>
+                    </div>
+                </div>
+            @*<div class="row">
+                <div class="col-xs-2 col-md-1">
+                    <a href="#" class="thumbnail">
+                        <img src="@launch.rocket.imageURL" alt="@launch.rocket.name">
+                    </a>
+                </div>
+                <div class="col-xs-2 col-md-1"></div>
+            </div>*@
+            }
+        </div>
+    </div>
+</div>
+
