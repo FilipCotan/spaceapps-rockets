@@ -33,7 +33,7 @@
                     <span><i class="fa fa-arrows-alt"></i>@Model.location.name</span>
                 </div>
                 <div class="address">
-                    @Model.windowstart >> @Model.windowend
+                    <span id="windowstart-id">@Model.windowstart</span> --> @Model.windowend
                 </div>
 
             </div>
@@ -178,6 +178,18 @@
                 </div>
             </div>
 
+       @* Timer *@
+        <div class="col-lg-4 col-sm-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            COUNTDOWN
+                        </h4>
+                        <p id="timer"></p>
+                    </div>
+                </div>
+            </div>
+
 
     @* Mission item *@
     @{
@@ -232,6 +244,25 @@
 
         function buyTickets() {
             window.open('https://www.kennedyspacecenter.com/info/tickets','_blank'); 
+        }
+
+
+        window.onload = function startTimer() {
+            date = $("#windowstart-id").text()
+            var countDownDate = new Date(date).getTime();
+            var x = setInterval(function() {
+                var now = new Date().getTime();
+                var distance = countDownDate - now;
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById("timer").innerHTML = days + " DAYS <br/>" + hours + " HRS<br/>"
+                + minutes + " MINS<br/>" + seconds + " SECS<br/>";
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("timer").innerHTML = "EXPIRED";
+            } }, 1000);
         }
     </script>
 }
