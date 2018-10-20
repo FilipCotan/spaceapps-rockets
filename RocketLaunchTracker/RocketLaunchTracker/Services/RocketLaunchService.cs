@@ -24,5 +24,18 @@ namespace RocketLaunchTracker.Services
                 return launchInfo;
             }
         }
+
+        public async Task<Launch> GetLaunchAsync(int id)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.BaseAddress = new Uri(apiBaseUrl);
+
+                var resultString = await httpClient.GetStringAsync($"launch/{id}");
+                var launch = JsonConvert.DeserializeObject<LaunchInfo>(resultString);
+
+                return launch.launches.First();
+            }
+        }
     }
 }
