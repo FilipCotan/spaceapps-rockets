@@ -40,7 +40,7 @@ namespace RocketLaunchTracker.Services
 
         internal Task SendNotificationEmailAsync(string launchId)
         {
-            throw new NotImplementedException();
+            
         }
 
         private List<SpacePort> GetSpacePorts()

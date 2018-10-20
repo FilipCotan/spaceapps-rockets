@@ -175,7 +175,7 @@ html, body {
 }
 
 .container-fluid {
-    height: 800px;
+    height: 937px;
     overflow-y: hidden; /* don't show content that exceeds my height */
 }
 
@@ -194,7 +194,7 @@ html, body {
 }
 
 .follow {
-    margin-top: 84px;
+    margin-top: 47px;
     cursor: pointer;
 }
 }
