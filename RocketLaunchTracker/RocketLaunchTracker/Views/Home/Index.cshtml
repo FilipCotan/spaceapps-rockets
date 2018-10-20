@@ -20,27 +20,36 @@
 <div class="clearfix"></div>
 <section class="search-box">
     <div class="container-fluid">
-        <div class="row" id="container-row">
-            <div class="col-md-4 listing-block" id="launches">                                
+        <div class="row" id="container-row" >
+            <div class="col-md-4 listing-block" id="launches">
+                
+                <div class="search-bar">
+                    <span class="in-line-search-bar">
+                        <input class="search-bar-input" 
+                        placeholder="Search..."/>
+                        <img 
+                            width="20px"
+                            height="20px"
+                        src="https://static.thenounproject.com/png/14173-200.png"/>
+                    </span>
+                </div>
                 @foreach (var launch in Model.launches)
                 {
                     <div class="media" id="@launch.id">
                         <div class="fav-box">
                             <div id="status" style="background: @GetStatusCssClass(launch.status);"></div>
-                            <span class="fa fa-heart-o follow" id="follow-@launch.id" onclick='followLaunch("@launch.id")'></span>
+                            <span class="fa-follow" id="follow-@launch.id" onclick='followLaunch("@launch.id")'>Follow</span>
                         </div>
                         <img id="launch-image" class="d-flex align-self-start" src="@launch.rocket.imageURL" alt="@launch.rocket.name">
                         <div class="media-body pl-3">
-                            <div>
-                                <strong>
-                                    <a asp-controller="Rocket"
-                                       asp-action="Details" asp-route-id="@launch.id">@launch.name</a>
-                                </strong>
-                            </div>
+                            <div><strong>
+                                     <a asp-controller="Rocket" 
+                                        asp-action="Details" asp-route-id="@launch.id"><div class="launch-name-label">@launch.name</div></a>
+                            </strong></div>
                             <div class="stats">
                                 <span>@launch.location.name</span>
                             </div>
-
+                            
 
                             <div class="address">
                                 <span>
@@ -56,7 +65,6 @@
                     <input type="hidden" id="launchName-@launch.id" name="@launch.id" value="@launch.name" />
                     <input type="hidden" id="sdate-@launch.id" name="@launch.id" value="@launch.windowstart" />
                 }
-
             </div>
             @{
                 var location = "https://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&815&sspn=8.047465,13.666992&ie=UTF8&hq=&hnear=15+Springfield+Way,+Hythe+CT21+5SH,+United+Kingdom&t=m&z=14&ll=51.077429,1.121722&&q=Space+Needle,Seattle+WA&output=embed";
@@ -79,14 +87,30 @@
             });
         });
 
-        function followLaunch(launchId) {
-            var heartId = "follow-" + launchId;
-            $("#" + heartId).removeClass().addClass("fa fa-heart follow");
+        function buyTickets() {
+            window.open('https://www.kennedyspacecenter.com/info/tickets','_blank'); 
+        }
 
-            $.post("/Home/AddToFavorites/" + launchId,
-                function(data) {
-                    //do nothing    
-                }).fail(function(err) {
+        function followLaunch(launchId) {
+         
+
+            var heartId = "follow-" + launchId;
+            $("#" + heartId).removeClass().addClass("fa-followed").text("Following");
+            if(launchId === "1059" || launchId === "1065")
+            $.get("https://launchlibrary.net/1.3/launch/" + launchId, function(data) {
+                  Push.create("Rocket Launch Comming Soon!", {
+                    body: data.launches[0].rocket.name + (launchId === "1059" ? " is launching in 30 minutes!" : " is has been delayed for 7 day!"),
+                    icon: data.launches[0].rocket.imageURL,
+                    timeout: 4000,
+                    onClick: function () {
+                        window.open(data.launches[0].vidURLs[0]
+                            .replace(/(.*?v=)([a-zA-Z0-9]+)/, "https://www.youtube.com/embed/$2"), '_blank');
+                    }
+                });
+            })
+            $.post("/Home/AddToFavorites?launchId=" + launchId, function (data) {
+                //do nothing    
+            }).fail(function (err) {
                 alert(err);
             });
         }

@@ -13,23 +13,22 @@
 
 
 
-<div class="container-fluid">
+<div class="container-fluid" id="details-screen-full">
 <div class="row">
-<div class="col-md-12 ">
-    <div class="media">
+<div class="col-md-12 " id="item-page">
+    <div class="media" id="title-launch-item-page">
         <div class="col-md-3">
-            <img height="40" width="40" class="d-flex align-self-start" src="@Model.rocket.imageURL" alt="@Model.rocket.name">
+            <img height="140" class="d-flex align-self-start" src="@Model.rocket.imageURL" alt="@Model.rocket.name">
         </div>
         <div class="col-md-6">
             <div class="media-body pl-3">
                 @{
                     if (Model.location.pads.FirstOrDefault() != null && Model.location.pads.First().agencies != null && Model.location.pads.First().agencies.FirstOrDefault() != null)
                     {
-                        <h2>@Model.location.pads.First().agencies.First().name</h2>
+                        <h5>@Model.location.pads.First().agencies.First().name</h5>
                     }
                 }
-
-                <h3>@Model.name</h3>
+                <h4>@Model.name</h4>
                 <div class="stats">
                     <span><i class="fa fa-arrows-alt"></i>@Model.location.name</span>
                 </div>
@@ -39,31 +38,47 @@
 
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="social-buttons">
             <i class="fab fa-twitter"></i>
             <i class="fab fa-google"></i>
             <i class="fab fa-facebook-f"></i>
-            <i class="far fa-flag"></i>
+        </div>
+        <div class="col-md-2">
             <div class="status">
-                Status: @Model.status
+                 @{
+                    if (Model.status == 1) { <h5 id="status-green" class="status-label">GREEN</h5> }
+                    if (Model.status == 2) { <h5 id="status-red" class="status-label">RED</h5> }
+                    if (Model.status == 3) { <h5 id="status-success" class="status-label">SUCCESS</h5> }
+                    if (Model.status == 4) { <h5 id="status-fail" class="status-label">FAIL</h5> }
+                }
             </div>
         </div>
     </div>
 </div>
 </div>
 
-<div class="row">
+<div class="row" id="cards-grid">
     @* Rocket item *@
-    <div class="col-lg-4 col-sm-6">
-        <div class="card h-100">
-            <img height="40" width="40" class="img-thumbnail" src="@Model.rocket.imageURL" alt="" />
+    <div class="col-lg-4">
+        <div class="card h-100 w-100">
+            <img height="100" class="img-thumbnail"
+                 src="@Model.rocket.imageURL" alt="" />
             <div class="card-body">
+
+           
                 <h4 class="card-title">
-                    Rocket
+                    ROCKET NAME
                 </h4>
                 <h3 class="card-title">
                     @Model.rocket.name
                 </h3>
+                <h6 class="special_link">@{
+                    if (Model.rocket.wikiURL != null) {
+        
+                        <a href="@Model.rocket.wikiURL">Wikipedia</a>
+                    }
+                }
+                </h6>
             </div>
         </div>
     </div>
@@ -71,14 +86,17 @@
     @* Location item *@
     <div class="col-lg-4 col-sm-6">
         <div class="card h-100">
-            <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&815&sspn=8.047465,13.666992&ie=UTF8&hq=&hnear=15+Springfield+Way,+Hythe+CT21+5SH,+United+Kingdom&t=m&z=14&ll=51.077429,1.121722&output=embed"></iframe>
+            <iframe width="100%" height="100%" 
+            frameborder="" scrolling="no" 
+            marginheight="0" marginwidth="0" 
+            src="https://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&815&sspn=8.047465,13.666992&ie=UTF8&hq=&hnear=15+Springfield+Way,+Hythe+CT21+5SH,+United+Kingdom&t=m&z=14&ll=51.077429,1.121722&output=embed"></iframe>
             <div class="card-body">
                 <h4 class="card-title">
-                    Location
+                    LOCATION
                 </h4>
-                <h2>
+                <h4>
                     @Model.location.name
-                </h2>
+                </h4>
             </div>
         </div>
     </div>
@@ -89,7 +107,7 @@
             <iframe width="100%" height="100%" src="@(Model.vidURL == null ? "https://www.youtube.com/embed/5TlrscfERDU" :  Model.vidURL)" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             <div class="card-body">
                 <h4 class="card-title">
-                    Rocket launch
+                    YOUTUBE VIDEO
                 </h4>
             </div>
         </div>
@@ -97,8 +115,6 @@
 
     @* Agency item *@
     @{
-
-
         if (@Model.location.pads.FirstOrDefault()?.agencies?.Count > 0)
         {
             var agency = @Model.location.pads.First().agencies.First();
@@ -106,16 +122,17 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <h4 class="card-title">
-                            Agency
+                            AGENCY
                         </h4>
-                        <h3 class="card-title">
+                        <h3 class="card-subtitle">
                             @agency.name
                         </h3>
-                        Useful links:
-                        <ul>
+                        <ul class="list_links">
                             @foreach (var url in agency.infoURLs)
                             {
-                                <li><a href="@url">@url</a></li>
+                                <li class="special_link">
+                                    <a href="@url">@url</a>
+                                </li>
                             }
                         </ul>
                     </div>
@@ -131,16 +148,36 @@
             <div class="card h-100">
                 <div class="card-body">
                     <h4 class="card-title">
-                        Fail reason
+                        FAIL REASON
                     </h4>
-                    <h3>
+                    <h4 class="card-subtitle">
                         @Model.failreason
-                    </h3>
+                    </h4>
                     <h4>Probability: @Model.probability</h4>
                 </div>
             </div>
         </div>
     }
+
+       @* Buy Tickets *@
+        <div class="col-lg-4 col-sm-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            BUY TICKETS
+                        </h4>
+                        <div class="description-style-cool">
+                            Tickets are available for purchase online and at the visitor complex when you arrive.
+                            Advance purchase for add-on enhancements, including special interest tours, 
+                            is recommended since these experiences can sell out before the scheduled date.
+                        </div>
+                        <h4 class="fa-follow" onclick="buyTickets()">
+                            BUY TICKETS
+                        </h4>
+                    </div>
+                </div>
+            </div>
+
 
     @* Mission item *@
     @{
@@ -150,16 +187,16 @@
             <div class="col-lg-4 col-sm-6 ">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h2 class="card-title">
-                            Mission
-                        </h2>
-                        <h2 class="card-title">
+                        <h4 class="card-title">
+                            MISSION
+                        </h4>
+                        <h4 class="card-subtitle">
                             <strong>@mission.name</strong>
-                        </h2>
-                        <p>
+                        </h4>
+                        <p class="description-style-cool">
                             @mission.description
                         </p>
-                        <h5>@mission.typeName</h5>
+                        <h6>@mission.typeName</h6>
                     </div>
                 </div>
             </div>
@@ -173,11 +210,11 @@
                      <div class="card h-100">
                          <div class="card-body">
                              <h4 class="card-title">
-                                 Payload
+                                 PAYLOAD
                              </h4>
-                             <h2>
+                             <h4>
                                  @mission.payloads.First().name
-                             </h2>
+                             </h4>
                          </div>
                      </div>
                  </div>
@@ -188,3 +225,13 @@
 
 </div>
 </div>
+
+
+@section Scripts {
+    <script>
+
+        function buyTickets() {
+            window.open('https://www.kennedyspacecenter.com/info/tickets','_blank'); 
+        }
+    </script>
+}
