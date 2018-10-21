@@ -59,8 +59,8 @@
                         </div>
                     </div>
 
-                    <input type="hidden" id="longitude-@launch.id" name="@launch.id" value="@launch.location.pads.First().longitude" />
-                    <input type="hidden" id="latitude-@launch.id" name="@launch.id" value="@launch.location.pads.First().latitude" />
+                    <input type="hidden" id="longitude-@launch.id" name="@launch.id" value="@launch.location.pads?.FirstOrDefault()?.longitude" />
+                    <input type="hidden" id="latitude-@launch.id" name="@launch.id" value="@launch.location.pads?.FirstOrDefault()?.latitude" />
                     <input type="hidden" id="name-@launch.id" name="@launch.id" value="@launch.location.name" />
                     <input type="hidden" id="launchName-@launch.id" name="@launch.id" value="@launch.name" />
                     <input type="hidden" id="sdate-@launch.id" name="@launch.id" value="@launch.windowstart" />
@@ -166,7 +166,7 @@
                     names +
                     '</div>';                    
 
-                console.log(content);
+                //console.log(content);
 
                 var infowindow = new google.maps.InfoWindow();
 
@@ -233,10 +233,22 @@
                 }
                 locations[i].launchNames = launchNamesCurrent;
                 locations[i].sdates = sdatesCurrent;
-                console.log(locations[i]);
+                //console.log(locations[i]);
             }
         }
-        
+
+        function placeSpacePorts() {
+            var spacePorts;
+            $.get("/Home/SpacePorts",
+                function (data) {                    
+                    console.log(data);
+                    spacePorts = data;
+                });
+
+            console.log(spacePorts);
+        }
+
+        placeSpacePorts();
     </script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8syvvg1e0faxIN_M5QBMVsTNtoZF7dqI&callback=initMap">

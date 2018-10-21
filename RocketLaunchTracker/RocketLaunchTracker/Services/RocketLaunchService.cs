@@ -126,7 +126,7 @@ namespace RocketLaunchTracker.Services
             }
         }
 
-        private List<SpacePort> GetSpacePorts()
+        public async Task<List<SpacePort>> GetSpacePorts()
         {
             var jsonString = @"[
     {
@@ -163,7 +163,7 @@ namespace RocketLaunchTracker.Services
       ""country"": ""Egypt"",
       ""location"": ""Jabal Hamzah ballistic missile test and launch facility"",
       ""coordinates"":{""latitude"": ""30.125750"", ""longitude"": ""30.605139""},
-      ""operational_date"": ""Late 1950s–present"",
+      ""operational_date"": {""start_year"": ""Late 1950s"", ""end_year"": """"},
       ""rocket_launches"": 6,
       ""heaviest_rocket"": """",
       ""highest_altitude"": """",
@@ -180,16 +180,6 @@ namespace RocketLaunchTracker.Services
       ""notes"": ""Scout rockets, operated by ASI and Sapienza University of Rome, Italy.""
     },
     {
-      ""country"": ""Libya"",
-      ""location"": ""Sabha, Tawiwa OTRAG Launch Center"",
-      ""coordinates"":""26.99392; 14.46425 "",
-      ""operational_date"": {""start_year"": ""1981"", ""end_year"": ""1982""},
-      ""rocket_launches"": null,
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": ""50 km"",
-      ""notes"": ""German OTRAG rockets.""
-    },
-    {
       ""country"": ""Mauritania"",
       ""location"": ""Nouadhibou"",
       ""coordinates"":{""latitude"": ""20.92856"", ""longitude"": ""-17.03153""},
@@ -198,16 +188,6 @@ namespace RocketLaunchTracker.Services
       ""heaviest_rocket"": """",
       ""highest_altitude"": """",
       ""notes"": ""During a solar eclipse""
-    },
-    {
-      ""country"": ""South Africa"",
-      ""location"": ""Overberg South African Test Centre"",
-      ""coordinates"":""-34.60265; 20.30248"",
-      ""operational_date"": {""start_year"": ""1989"", ""end_year"": ""1990""},
-      ""rocket_launches"": null,
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": """",
-      ""notes"": ""Launched test mission rockets only.""
     },
      {
       ""country"": ""China"",
@@ -271,16 +251,6 @@ namespace RocketLaunchTracker.Services
     },
     {
       ""country"": ""India"",
-      ""location"": ""Vikram Sarabhai Space Centre, Thiruvananthapuram (thumba), Kerala"",
-      ""coordinates"":""8.5314; 76.8690"",
-      ""operational_date"": {""start_year"": ""1962"", ""end_year"": """"},
-      ""rocket_launches"": "">2000"",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": """",
-      ""notes"": """"
-    },
-    {
-      ""country"": ""India"",
       ""location"": ""Satish Dhawan Space Centre (Sriharikota), Andhra Pradesh"",
       ""coordinates"":{""latitude"": ""13.73740"", ""longitude"": ""80.23510""},
       ""operational_date"": {""start_year"": ""1971"", ""end_year"": """"},
@@ -311,26 +281,6 @@ namespace RocketLaunchTracker.Services
     },
     {
       ""country"": ""Iran"",
-      ""location"": ""Qom Space Center"",
-      ""coordinates"":{""latitude"": ""34.65000"", ""longitude"": ""50.90000""},
-      ""operational_date"": ""1991"",
-      ""rocket_launches"": """",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": """",
-      ""notes"": ""Military testing""
-    },
-    {
-      ""country"": ""Iran"",
-      ""location"": ""Emamshahr Space Center"",
-      ""coordinates"":{""latitude"": ""36.42000"", ""longitude"": ""55.02000""},
-      ""operational_date"": ""1998"",
-      ""rocket_launches"": """",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": """",
-      ""notes"": ""Military testing and sounding rockets for ISA.""
-    },
-    {
-      ""country"": ""Iran"",
       ""location"": ""Semnan spaceport"",
       ""coordinates"":{""latitude"": ""35.234631"", ""longitude"": ""53.920941""},
       ""operational_date"": {""start_year"": ""2009"", ""end_year"": """"},
@@ -338,16 +288,6 @@ namespace RocketLaunchTracker.Services
       ""heaviest_rocket"": """",
       ""highest_altitude"": ""Orbital"",
       ""notes"": """"
-    },
-    {
-      ""country"": ""Iraq"",
-      ""location"": ""Al-Anbar Test Center"",
-      ""coordinates"":{""latitude"": ""32.78220"", ""longitude"": ""44.29962""},
-      ""operational_date"": ""1989"",
-      ""rocket_launches"": """",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": """",
-      ""notes"": ""Out of function""
     },
     {
       ""country"": ""Israel"",
@@ -470,16 +410,6 @@ namespace RocketLaunchTracker.Services
       ""notes"": """"
     },
     {
-      ""country"": ""Korea, South"",
-      ""location"": ""Naro Space Center, Gohueng"",
-      ""coordinates"":{""latitude"": ""34.42585"", ""longitude"": ""127.52793""},
-      ""operational_date"": ""2008"",
-      ""rocket_launches"": ""3"",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": ""Orbital"",
-      ""notes"": ""Attempted satellite launches""
-    },
-    {
       ""country"": ""Maldives"",
       ""location"": ""Gan Island"",
       ""coordinates"":{""latitude"": ""-0.69328"", ""longitude"": ""73.15672""},
@@ -488,26 +418,6 @@ namespace RocketLaunchTracker.Services
       ""heaviest_rocket"": """",
       ""highest_altitude"": """",
       ""notes"": ""Several rockets of the Kookaburra type were launched from a pad at 0°41' S and 73°9' E""
-    },
-    {
-      ""country"": ""Pakistan"",
-      ""location"": ""Sonmiani Satellite Launch Center, Las Bela, Balochistan"",
-      ""coordinates"":{""latitude"": ""25.19242"", ""longitude"": ""66.74881""},
-      ""operational_date"": ""1960s –"",
-      ""rocket_launches"": """",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": """",
-      ""notes"": ""Sounding rockets, missile testing, for SUPARCO.""
-    },
-    {
-      ""country"": ""Pakistan"",
-      ""location"": ""Tilla Satellite Launch Center, Jhelum District, Punjab"",
-      ""coordinates"":{""latitude"": ""33.39610"", ""longitude"": ""73.29608""},
-      ""operational_date"": ""1980s –"",
-      ""rocket_launches"": """",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": """",
-      ""notes"": ""Sounding rockets, missile testing, for SUPARCO.""
     },
     {
       ""country"": ""Russia"",
@@ -519,16 +429,7 @@ namespace RocketLaunchTracker.Services
       ""highest_altitude"": """",
       ""notes"": """"
     },
-    {
-      ""country"": ""Russia"",
-      ""location"": ""Svobodny Cosmodrome, Amur Oblast"",
-      ""coordinates"":""51.83441; 128.27570 "",
-      ""operational_date"": {""start_year"": ""1957"", ""end_year"": ""2007""},
-      ""rocket_launches"": """",
-      ""heaviest_rocket"": ""47 000 kg"",
-      ""highest_altitude"": ""Orbital"",
-      ""notes"": ""ICBM base converted for satellites""
-    },
+
     {
       ""country"": ""Russia"",
       ""location"": ""Sovetskaya Gavan"",
@@ -558,16 +459,6 @@ namespace RocketLaunchTracker.Services
       ""heaviest_rocket"": ""211 000 kg"",
       ""highest_altitude"": ""Orbital"",
       ""notes"": ""ICBM base converted for satellites""
-    },
-    {
-      ""country"": ""Russia"",
-      ""location"": ""Vostochny Cosmodrome, Amur Oblast, Russia"",
-      ""coordinates"":{""latitude"": ""51.883"", ""longitude"": ""128.333""},
-      ""operational_date"": ""28 April 2016–"",
-      ""rocket_launches"": """",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": """",
-      ""notes"": ""Facility on Russian territory to supplement Baikonur Cosmodrome in Kazakhstan""
     },
     {
       ""country"": ""Taiwan"",
@@ -800,75 +691,6 @@ namespace RocketLaunchTracker.Services
       ""notes"": ""Arcas, Nike-Cajun and Nike-Apache rockets for atmospheric research.""
     },
     {
-      ""country"": ""Sweden"",
-      ""location"": ""Esrange, Kiruna"",
-      ""coordinates"":""67.89342; 21.10429 "",
-      ""operational_date"": {""start_year"": ""1966"", ""end_year"": ""1972""},
-      ""rocket_launches"": ""150"",
-      ""heaviest_rocket"": ""700 kg"",
-      ""highest_altitude"": ""237 km"",
-      ""notes"": ""Operated by ESRO.""
-    },
-    {
-      ""country"": ""Sweden"",
-      ""location"": ""Esrange, Kiruna"",
-      ""coordinates"":""67.89342; 21.10429 "",
-      ""operational_date"": {""start_year"": ""1972"", ""end_year"": """"},
-      ""rocket_launches"": ""300"",
-      ""heaviest_rocket"": ""12 400 kg"",
-      ""highest_altitude"": ""717 km"",
-      ""notes"": ""Operated by SSC. Major programmes: Maxus, TEXUS, Maser, stratospheric balloons.""
-    },
-    {
-      ""country"": ""United Kingdom"",
-      ""location"": ""Highdown Test Site, Isle of Wight"",
-      ""coordinates"":""50.6639345; -1.5763664 "",
-      ""operational_date"": {""start_year"": ""1956"", ""end_year"": ""1971""},
-      ""rocket_launches"": ""0"",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": """",
-      ""notes"": ""This site was used for static tests of assembled rockets only prior to them being shipped to Australia for launch.""
-    },
-    {
-      ""country"": ""United Kingdom"",
-      ""location"": ""South Uist"",
-      ""coordinates"":""57.33000; -7.33000 "",
-      ""operational_date"": {""start_year"": ""1959"", ""end_year"": """"},
-      ""rocket_launches"": ""1 (2015)"",
-      ""heaviest_rocket"": ""approx 1300 kg plus payload"",
-      ""highest_altitude"": """",
-      ""notes"": ""First space launch from the UK took place from here in October 2015 as part of 'At Sea Demonstration 15' . The rocket was an American 'Terrier-Orion' sounding rocket.""
-    },{
-      ""country"": ""Canada"",
-      ""location"": ""Churchill Rocket Research Range, Manitoba"",
-      ""coordinates"":""58.73430; -93.82030 "",
-      ""operational_date"": {""start_year"": ""1954"", ""end_year"": ""1998""},
-      ""rocket_launches"": "">3500"",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": """",
-      ""notes"": ""Canadian Army.""
-    },
-    {
-      ""country"": ""Canada"",
-      ""location"": ""Resolute Bay, Nunavut"",
-      ""coordinates"":""74.6870; -94.8962 "",
-      ""operational_date"": {""start_year"": ""1966"", ""end_year"": ""1971""},
-      ""rocket_launches"": ""17"",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": """",
-      ""notes"": ""National Research Council Canada.""
-    },
-    {
-      ""country"": ""Canada"",
-      ""location"": ""Hall Beach"",
-      ""coordinates"":{""latitude"": ""68.77607"", ""longitude"": ""-81.24346""},
-      ""operational_date"": {""start_year"": ""1971"", ""end_year"": ""1971""},
-      ""rocket_launches"": ""7"",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": ""270 km"",
-      ""notes"": """"
-    },
-    {
       ""country"": ""Canada"",
       ""location"": ""Southend"",
       ""coordinates"":{""latitude"": ""56.333"", ""longitude"": ""-103.233""},
@@ -890,16 +712,6 @@ namespace RocketLaunchTracker.Services
     },
     {
       ""country"": ""United States"",
-      ""location"": ""Wallops Flight Facility, Delmarva Peninsula, Virginia"",
-      ""coordinates"":""37.84621; -75.47938 "",
-      ""operational_date"": {""start_year"": ""1945"", ""end_year"": """"},
-      ""rocket_launches"": """",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": """",
-      ""notes"": ""Now operated by NASA's Goddard Space Flight Center""
-    },
-    {
-      ""country"": ""United States"",
       ""location"": ""White Sands Missile Range"",
       ""coordinates"":{""latitude"": ""32.56460"", ""longitude"": ""-106.35908""},
       ""operational_date"": {""start_year"": ""1946"", ""end_year"": """"},
@@ -907,112 +719,12 @@ namespace RocketLaunchTracker.Services
       ""heaviest_rocket"": """",
       ""highest_altitude"": """",
       ""notes"": ""Military and civilian flights. Served as alternate landing site for the space shuttle.""
-    },
-    {
-      ""country"": ""United States"",
-      ""location"": ""Nevada Test and Training Range (formerly Nellis Air Force Range)"",
-      ""coordinates"":{""latitude"": ""36.77150"", ""longitude"": ""-116.11374""},
-      ""operational_date"": ""1950s–"",
-      ""rocket_launches"": """",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": """",
-      ""notes"": """"
-    },
-    {
-      ""country"": ""United States"",
-      ""location"": ""Cape Canaveral Air Force Station, Florida"",
-      ""coordinates"":{""latitude"": ""28.46675"", ""longitude"": ""-80.55852""},
-      ""operational_date"": {""start_year"": ""1956"", ""end_year"": """"},
-      ""rocket_launches"": """",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": ""Interstellar"",
-      ""notes"": ""Commercial and U.S. Government unmanned missions.""
-    },
-    {
-      ""country"": ""United States"",
-      ""location"": ""Vandenberg Air Force Base, California"",
-      ""coordinates"":{""latitude"": ""34.77204"", ""longitude"": ""-120.60124""},
-      ""operational_date"": {""start_year"": ""1958"", ""end_year"": """"},
-      ""rocket_launches"": """",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": ""Interplanetary"",
-      ""notes"": ""Satellites, ballistic missile tests. Government and commercial launches.""
-    },
-    {
-      ""country"": ""United States"",
-      ""location"": ""Kennedy Space Center, Florida"",
-      ""coordinates"":{""latitude"": ""28.6082"", ""longitude"": ""-80.6040""},
-      ""operational_date"": {""start_year"": ""1963"", ""end_year"": """"},
-      ""rocket_launches"": ""151"",
-      ""heaviest_rocket"": ""3 000 000 kg"",
-      ""highest_altitude"": ""Interplanetary"",
-      ""notes"": ""Launched each NASA manned mission. Adjacent to Cape Canaveral Air Force Station.""
-    },
-    {
-      ""country"": ""United States"",
-      ""location"": ""Pacific Missile Range Facility, Hawaii"",
-      ""coordinates"": ""22°01′22″N 159°47′06″W / 22.02278°N 159.785°W / 22.02278; -159.785"",
-      ""operational_date"": {""start_year"": ""1963"", ""end_year"": """"},
-      ""rocket_launches"": """",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": """",
-      ""notes"": ""testing of antiballistic missile and missile tracking by the US Navy.""
-    },
-    {
-      ""country"": ""United States"",
-      ""location"": ""Keweenaw, Michigan"",
-      ""coordinates"":{""latitude"": ""47.42980"", ""longitude"": ""-87.71443""},
-      ""operational_date"": {""start_year"": ""1964"", ""end_year"": ""1971""},
-      ""rocket_launches"": "">50"",
-      ""heaviest_rocket"": ""770 kg"",
-      ""highest_altitude"": ""<160 km"",
-      ""notes"": ""Currently inactive""
-    },
-    {
-      ""country"": ""United States"",
-      ""location"": ""Kodiak Launch Complex, Alaska"",
-      ""coordinates"":{""latitude"": ""57.43533"", ""longitude"": ""-152.33931""},
-      ""operational_date"": {""start_year"": ""1991"", ""end_year"": """"},
-      ""rocket_launches"": ""14"",
-      ""heaviest_rocket"": ""86 000 kg"",
-      ""highest_altitude"": ""Orbital"",
-      ""notes"": ""Ballistic missile interceptor tests, satellite launches. Alaska Aerospace Corporation.""
-    },
-    {
-      ""country"": ""United States"",
-      ""location"": ""Mojave Air and Space Port, California"",
-      ""coordinates"":{""latitude"": ""35.05910"", ""longitude"": ""-118.14880""},
-      ""operational_date"": {""start_year"": ""2004"", ""end_year"": """"},
-      ""rocket_launches"": """",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": ""112 km"",
-      ""notes"": ""Privately funded spacecraft (Xoie, Xombie,  Xodiac, SpaceShipOne, SpaceShipTwo).""
-    },
-    {
-      ""country"": ""United States"",
-      ""location"": ""Spaceport America (formerly Southwest Regional Spaceport), Upham, New Mexico"",
-      ""coordinates"":{""latitude"": ""32.88943"", ""longitude"": ""-106.99945""},
-      ""operational_date"": {""start_year"": ""2006"", ""end_year"": """"},
-      ""rocket_launches"": ""8"",
-      ""heaviest_rocket"": """",
-      ""highest_altitude"": """",
-      ""notes"": ""Sub-orbital commercial and planned space tourist launches. Operated by the state of New Mexico with Virgin Galactic as the anchor tenant.""
-    },
-    {
-      ""country"": ""United States"",
-      ""location"": ""Mid-Atlantic Regional Spaceport (MARS), Delmarva Peninsula, Virginia"",
-      ""coordinates"":{""latitude"": ""37.833378"", ""longitude"": ""-75.483284""},
-      ""operational_date"": {""start_year"": ""2006"", ""end_year"": """"},
-      ""rocket_launches"": ""6"",
-      ""heaviest_rocket"": ""89 805 kg"",
-      ""highest_altitude"": ""Lunar"",
-      ""notes"": ""Operates in partnership with NASA, adjacent to the Wallops Flight Facility site. Designed for both commercial and government launches.""
     }
    ]";
+            
+            var spacePorts = JsonConvert.DeserializeObject<List<SpacePort>>(jsonString);
 
-            //var spacePorts = JsonConvert.DeserializeObject<List<SpacePort>>();
-
-            return null;
+            return spacePorts;
         }
 
      

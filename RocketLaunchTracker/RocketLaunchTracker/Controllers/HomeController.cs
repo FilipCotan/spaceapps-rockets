@@ -53,6 +53,13 @@ namespace RocketLaunchTracker.Controllers
             return Ok();
         }
 
+        public async Task<IActionResult> SpacePorts()
+        {
+            var launch = await _rocketService.GetSpacePorts();
+
+            return Ok(launch);
+        }
+
 
         public IActionResult About()
         {
